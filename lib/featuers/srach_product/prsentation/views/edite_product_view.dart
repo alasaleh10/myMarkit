@@ -13,13 +13,12 @@ class EditProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocProvider(
         create: (context) => ProductsActionsCubit(ProductActionRepIm())
           ..getData(productModel: data[0]),
         child: Scaffold(
           appBar: appBar(context, title: 'تـعديل المــنتج'),
-          body:  EditeProductBodyView(isBarcode: data[1],context2: data[2]),
+          body: EditeProductBodyView(isBarcode: data[1], context2: data[2]),
         ));
   }
 }

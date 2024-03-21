@@ -20,7 +20,7 @@ class HomeBodyView extends StatelessWidget {
           children: [
             ImageColumn(
                 title: 'إضافة منتج',
-                image: Assets.imagesAddProduct,
+                image: Assets.imagesAdd,
                 onTap: () {
                   GoRouter.of(context).pushNamed(AppRouters.addProductView);
                 }),
@@ -32,14 +32,21 @@ class HomeBodyView extends StatelessWidget {
                 })
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ImageColumn(
                 title: 'إضافة فـاتورة',
                 image: Assets.imagesInvoice,
                 onTap: () {
                   GoRouter.of(context).pushNamed(AppRouters.invoiceView);
+                }),
+            ImageColumn(
+                title: 'الــديون',
+                image: Assets.imagesDebts,
+                onTap: () {
+                  GoRouter.of(context).pushNamed(AppRouters.debtsView);
                 })
           ],
         )

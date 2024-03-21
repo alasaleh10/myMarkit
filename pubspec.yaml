@@ -44,6 +44,7 @@ dependencies:
   simple_barcode_scanner: ^0.0.8
   dartz: ^0.10.1
   audioplayers: ^5.2.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

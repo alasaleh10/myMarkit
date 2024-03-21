@@ -17,12 +17,14 @@ class ProductCountContiner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = BlocProvider.of<InvoiceCubit>(context2);
     return AlertDialog.adaptive(
       icon: Column(
         children: [
           CustomTextFormFiald(
-              controller: BlocProvider.of<InvoiceCubit>(context2).productCount,
-              hintText: 'إاختيار الكمية',
+              keyboardType: TextInputType.number,
+              controller: controller.productCount,
+              hintText: 'إختيار الكمية',
               icon: FontAwesomeIcons.confluence),
           const SizedBox(height: 15),
           Row(
@@ -39,35 +41,44 @@ class ProductCountContiner extends StatelessWidget {
                   child: CustomElevatedButton(
                       title: 'تــأكيد',
                       onPressed: () {
-                        if (int.parse(BlocProvider.of<InvoiceCubit>(context2)
-                                .productCount
-                                .text) >
-                            int.parse(productModel.productCount!)) {
-                          ScaffoldMessenger.of(context).showSnackBar(customSnackBar(
-                              context,
-                              title:
-                                  'الكمية المتبقية ${productModel.productCount}'));
+                        if (controller.productCount.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              customSnackBar(context,
+                                  title: 'لايمكن ترك الكمية فارغا'));
+                        } else if (!RegExp('^[0-9]')
+                            .hasMatch(controller.productCount.text)) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              customSnackBar(context,
+                                  title: 'يجب ان يكون رقم'));
                         } else {
-                          int oldPrice =
-                              BlocProvider.of<InvoiceCubit>(context2).price;
-                          int count = int.parse(
-                              BlocProvider.of<InvoiceCubit>(context2)
+                          if (int.parse(BlocProvider.of<InvoiceCubit>(context2)
                                   .productCount
-                                  .text);
-                          int price = int.parse(productModel.productPrice!);
+                                  .text) >
+                              int.parse(productModel.productCount!)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                customSnackBar(context,
+                                    title:
+                                        'الكمية المتبقية ${productModel.productCount}'));
+                          } else {
+                            int oldPrice = controller.price;
+                            int count = int.parse(controller.productCount.text);
+                            int price = int.parse(productModel.productPrice!);
 
-                          BlocProvider.of<InvoiceCubit>(context2)
-                              .editPrice(price: oldPrice + (price * count));
-                          InvoiceModel invoiceModel = InvoiceModel(
-                              id: productModel.productId!.toInt(),
-                              count: count,
-                              price: (price * count),
-                              productName: productModel.productName!,
-                              onePrice: int.parse(productModel.productPrice!));
-                          BlocProvider.of<InvoiceCubit>(context2)
-                              .addToInvoice(invoiceModel: invoiceModel);
+                            controller.editPrice(
+                                price: oldPrice + (price * count));
+                            InvoiceModel invoiceModel = InvoiceModel(
+                                id: productModel.productId!.toInt(),
+                                count: count,
+                                price: (price * count),
+                                totalCount:
+                                    int.parse(productModel.productCount!),
+                                productName: productModel.productName!,
+                                onePrice:
+                                    int.parse(productModel.productPrice!));
+                            controller.addToInvoice(invoiceModel: invoiceModel);
 
-                          context.pop();
+                            context.pop();
+                          }
                         }
                       }))
             ],

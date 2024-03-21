@@ -20,7 +20,7 @@ class ProductsActionsCubit extends Cubit<ProductsActionsState> {
     name.text = productModel.productName!;
     price.text = productModel.productPrice!;
     count.text = productModel.productCount!;
-    barcode=productModel.productBarcode!;
+    barcode = productModel.productBarcode!;
     date = DateTime.parse(productModel.productFinishDate!);
   }
 
@@ -41,10 +41,8 @@ class ProductsActionsCubit extends Cubit<ProductsActionsState> {
       var response = await productActionRep.editeProduct(
           productModel: data, id: productModel.productId!.toInt());
       response.fold((failure) {
-        
         emit(ProductsActionsFailure(errorMessage: failure.errorMessage));
       }, (sucsess) {
-    
         emit(ProductsActionsSucsess2());
       });
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_markit/core/functions/decimal_numbers.dart';
 import 'package:my_markit/core/utils/app_colors.dart';
 import 'package:my_markit/core/utils/app_styls.dart';
 import 'package:my_markit/featuers/add_product/data/product_model.dart';
@@ -32,7 +33,8 @@ class CustomGridViewItem extends StatelessWidget {
                 productModel.productName!,
                 style: AppStyle.style20Bold(context),
               ),
-              Text('${productModel.productPrice!} ر.ي'),
+              Text(
+                  '${decimalNumer(price: int.parse(productModel.productPrice!))}ر.ي'),
             ],
           ),
         ),

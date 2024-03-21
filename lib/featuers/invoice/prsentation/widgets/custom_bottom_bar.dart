@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_markit/core/functions/custom_snack_bar.dart';
+import 'package:my_markit/core/functions/decimal_numbers.dart';
 import 'package:my_markit/core/utils/app_colors.dart';
 import 'package:my_markit/core/utils/app_styls.dart';
 import 'package:my_markit/core/widgets/custom_elevated_button.dart';
@@ -19,7 +20,8 @@ class CustomInvoiceBottomBar extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
                 customSnackBar(context, title: state.errorMessage));
           } else if (state is InvoiceSucsess2) {
-            ScaffoldMessenger.of(context).showSnackBar(customSnackBar(context, title: 'تمت العميلة بنجاح'));
+            ScaffoldMessenger.of(context).showSnackBar(
+                customSnackBar(context, title: 'تمت العميلة بنجاح'));
             BlocProvider.of<InvoiceCubit>(context).clearData();
           }
         },
@@ -38,7 +40,7 @@ class CustomInvoiceBottomBar extends StatelessWidget {
                 )),
                 Expanded(
                     child: Text(
-                  '${BlocProvider.of<InvoiceCubit>(context).price.toString()} ر.ي',
+                  '${decimalNumer(price: BlocProvider.of<InvoiceCubit>(context).price)}ر.ي',
                   style: AppStyle.style20Bold(context),
                 )),
                 Expanded(

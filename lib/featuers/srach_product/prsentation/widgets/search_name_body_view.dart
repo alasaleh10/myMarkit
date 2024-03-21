@@ -8,7 +8,6 @@ import 'package:my_markit/featuers/srach_product/prsentation/manger/search_produ
 import 'package:my_markit/featuers/srach_product/prsentation/widgets/dispaly_product.dart';
 
 class SearchNameBodyView extends StatelessWidget {
-  
   const SearchNameBodyView({super.key});
 
   @override
@@ -18,7 +17,7 @@ class SearchNameBodyView extends StatelessWidget {
         SliverToBoxAdapter(
           child: CustomTextFormFiald(
               onChanged: (value) {
-                 BlocProvider.of<SearchProductCubit>(context).name=value;
+                BlocProvider.of<SearchProductCubit>(context).name = value;
                 BlocProvider.of<SearchProductCubit>(context)
                     .searchByBName(name: value!);
               },
@@ -50,9 +49,11 @@ class SearchNameBodyView extends StatelessWidget {
                 return SliverList(
                     delegate: SliverChildBuilderDelegate((context, index) {
                   return Padding(
-                      padding:const EdgeInsets.symmetric(vertical: 8),
-                      child:
-                          DisplayProduct(productModel: state.prodcust[index],isBarcode: false,));
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: DisplayProduct(
+                        productModel: state.prodcust[index],
+                        isBarcode: false,
+                      ));
                 }, childCount: state.prodcust.length));
             }
           },

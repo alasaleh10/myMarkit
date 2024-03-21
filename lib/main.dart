@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_markit/core/routers/routers.dart';
 import 'package:my_markit/core/sql_helper.dart';
 import 'package:my_markit/core/utils/app_theam.dart';
+import 'package:my_markit/core/widgets/observer.dart';
 import 'package:my_markit/generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SqlHeper.inizalizeDb();
+  Bloc.observer = SimpleObserver();
 
   runApp(const MyMarket());
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_markit/core/functions/decimal_numbers.dart';
 import 'package:my_markit/core/utils/app_colors.dart';
 import 'package:my_markit/core/utils/app_styls.dart';
 import 'package:my_markit/featuers/invoice/data/invoice_model.dart';
@@ -7,7 +8,8 @@ import 'package:my_markit/featuers/invoice/prsentation/widgets/edite_invoice_ite
 class InvoiceProductItem extends StatelessWidget {
   final int index;
   final InvoiceModel invoiceModel;
-  const InvoiceProductItem({super.key, required this.invoiceModel, required this.index});
+  const InvoiceProductItem(
+      {super.key, required this.invoiceModel, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,7 @@ class InvoiceProductItem extends StatelessWidget {
         showDialog(
             context: context,
             builder: (_) => EditInvoiceItems(
-              index: index,
-                context2: context, invoiceModel: invoiceModel));
+                index: index, context2: context, invoiceModel: invoiceModel));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -34,8 +35,11 @@ class InvoiceProductItem extends StatelessWidget {
               const SizedBox(height: 10),
               FittedBox(child: Text('الكمية : ${invoiceModel.count}')),
               FittedBox(
-                  child: Text('سعر الوحدة : ${invoiceModel.onePrice} ر.ي')),
-              FittedBox(child: Text('الاإجمـالي : ${invoiceModel.price} ر.ي')),
+                  child: Text(
+                      'سعر الوحدة : ${decimalNumer(price: invoiceModel.onePrice)}ر.ي')),
+              FittedBox(
+                  child: Text(
+                      'الاإجمـالي : ${decimalNumer(price: invoiceModel.price)}ر.ي')),
             ],
           ),
         ),

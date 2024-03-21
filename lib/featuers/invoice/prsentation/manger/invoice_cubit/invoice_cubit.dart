@@ -71,7 +71,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
           newReso.fold((failure) {
             emit(InvoiceFailure2(errorMessage: failure.errorMessage));
           }, (sucsess) {
-            invoice.removeAt(i);
+            // invoice.removeAt(i);
 
             emit(InvoiceSucsess2());
           });
@@ -91,6 +91,13 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   void clearData() {
     price = 0;
     invoice.clear();
+    emit(InvoiceInitial());
+  }
+
+  void editProductList(
+      {required int index, required List<InvoiceModel> invoiceModel}) {
+    invoice.removeAt(index);
+    invoice.insertAll(index, invoiceModel);
     emit(InvoiceInitial());
   }
 

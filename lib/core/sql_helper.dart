@@ -34,6 +34,26 @@ abstract class SqlHeper {
 
 )
    ''');
+    await db.execute('''
+   CREATE TABLE "clints" (
+  "clint_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "clint_name" TEXT NOT NULL,
+  "clint_phone" TEXT NOT NULL,
+  "createTime" TEXT NOT NULL
+
+)
+   ''');
+    await db.execute('''
+   CREATE TABLE "debts" (
+  "debts_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "continet" TEXT NOT NULL,
+  "price" INTEGER NOT NULL DEFAULT 0,
+  "id_clint" INTEGER NOT NULL,
+  "createTime" TEXT NOT NULL,
+  FOREIGN KEY (id_clint) REFERENCES clints(clint_id)
+
+)
+   ''');
 
     log('crated');
   }
@@ -62,16 +82,9 @@ abstract class SqlHeper {
     return response;
   }
 
-  static addProduct(dynamic productModel) async {
+  static addData({required String table, required dynamic data}) async {
     final db = _db;
-    final res = await db?.insert('products', productModel);
-
-    return res;
-  }
-
-  addFaviorte(dynamic faviorte) async {
-    final db = _db;
-    final res = await db?.insert('faviorte', faviorte);
+    final res = await db?.insert(table, data);
 
     return res;
   }
@@ -85,7 +98,8 @@ abstract class SqlHeper {
 
   static updateMessage(Map<String, dynamic> productModel, int id) async {
     final db = _db;
-    final res = await db?.update('products', productModel, where: 'product_id=$id');
+    final res =
+        await db?.update('products', productModel, where: 'product_id=$id');
 
     return res;
   }

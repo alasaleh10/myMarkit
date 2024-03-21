@@ -13,7 +13,6 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-         
             minimumSize: size,
             backgroundColor: AppColors.kPrimiryColor3,
             shape: RoundedRectangleBorder(

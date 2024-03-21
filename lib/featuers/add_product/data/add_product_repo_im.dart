@@ -16,7 +16,7 @@ class AddProductRepoIm implements AddProductRepo {
       List oldProduct = await SqlHeper.readdata(
           'SELECT * FROM products WHERE product_barcode=$productBarcode');
       if (oldProduct.isEmpty) {
-        var response = await SqlHeper.addProduct({
+        var response = await SqlHeper.addData(table: 'products', data: {
           'product_name': productName,
           'product_count': productCount,
           'product_price': productPrice,

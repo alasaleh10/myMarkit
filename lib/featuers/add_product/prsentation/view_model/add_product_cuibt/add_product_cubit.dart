@@ -28,11 +28,11 @@ class AddProductCubit extends Cubit<AddProductState> {
     isVisible = true;
     emit(AddProductInitial());
   }
-  void selectBarcode({required String barcode}){
-    productBarcode=barcode;
-      isVisible2 = true;
-    emit(AddProductInitial());
 
+  void selectBarcode({required String barcode}) {
+    productBarcode = barcode;
+    isVisible2 = true;
+    emit(AddProductInitial());
   }
 
   Future<void> addProduct() async {
@@ -76,8 +76,8 @@ class AddProductCubit extends Cubit<AddProductState> {
 
   @override
   Future<void> close() {
-  productName.dispose();
-  productPrice.dispose();
+    productName.dispose();
+    productPrice.dispose();
     return super.close();
   }
 }

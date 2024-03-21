@@ -61,7 +61,10 @@ class SearchBarcodeBodyView extends StatelessWidget {
                 );
               case SearchProductSucsess():
                 return SliverToBoxAdapter(
-                    child: DisplayProduct(productModel: state.prodcust[0],isBarcode: true,));
+                    child: DisplayProduct(
+                  productModel: state.prodcust[0],
+                  isBarcode: true,
+                ));
             }
           },
         )

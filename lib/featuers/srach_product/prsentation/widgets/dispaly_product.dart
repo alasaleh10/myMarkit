@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_markit/core/utils/app_colors.dart';
 
-
 import 'package:my_markit/featuers/add_product/data/product_model.dart';
 import 'package:my_markit/featuers/srach_product/prsentation/widgets/product_actions_row.dart';
 import 'package:my_markit/featuers/srach_product/prsentation/widgets/product_row_detils.dart';
@@ -12,7 +11,8 @@ class DisplayProduct extends StatelessWidget {
 
   const DisplayProduct({
     super.key,
-    required this.productModel, required this.isBarcode,
+    required this.productModel,
+    required this.isBarcode,
   });
 
   @override
@@ -41,11 +41,9 @@ class DisplayProduct extends StatelessWidget {
           PRoductDetilsRow(
               title: 'رقم الــباركود', detils: productModel.productBarcode!),
           const Divider(color: AppColors.kPrimiryColor3),
-          ProductsActionsRow(productModel: productModel,isBarcode: isBarcode),
-        
+          ProductsActionsRow(productModel: productModel, isBarcode: isBarcode),
         ],
       ),
     );
   }
 }
-

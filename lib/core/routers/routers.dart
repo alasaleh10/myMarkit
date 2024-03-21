@@ -1,8 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_markit/core/routers/app_routers.dart';
 import 'package:my_markit/core/routers/page_animation.dart';
 
 import 'package:my_markit/featuers/add_product/prsentation/views/add_product._view.dart';
+import 'package:my_markit/featuers/debts/data/models/clint_model.dart';
+import 'package:my_markit/featuers/debts/prsentation/views/add_clint_view.dart';
+import 'package:my_markit/featuers/debts/prsentation/views/add_debet_view.dart';
+import 'package:my_markit/featuers/debts/prsentation/views/debts_view.dart';
+import 'package:my_markit/featuers/debts/prsentation/views/display_debts_view.dart';
 import 'package:my_markit/featuers/home/prsentation/views/home_view.dart';
 import 'package:my_markit/featuers/invoice/prsentation/views/invoice_view.dart';
 import 'package:my_markit/featuers/spalsh_screen/splash_view.dart';
@@ -62,6 +68,40 @@ abstract class Routers {
       name: AppRouters.invoiceView,
       pageBuilder: (context, state) => pageAnimation(
         page: const InvoiceView(),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRouters.debtsView}',
+      name: AppRouters.debtsView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: const DebtsView(),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRouters.addClintView}',
+      name: AppRouters.addClintView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: AddClintView(
+          context2: state.extra as BuildContext,
+        ),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRouters.displayDebtsView}',
+      name: AppRouters.displayDebtsView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: DisplayDebtsView(
+          clintModel: state.extra as ClintModel,
+        ),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRouters.addDebtView}',
+      name: AppRouters.addDebtView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: AddDebtView(
+          data: state.extra as List,
+        ),
       ),
     ),
   ]);

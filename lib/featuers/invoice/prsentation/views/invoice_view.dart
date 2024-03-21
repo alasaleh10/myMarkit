@@ -16,7 +16,6 @@ class InvoiceView extends StatelessWidget {
       child: Scaffold(
         bottomNavigationBar: const CustomInvoiceBottomBar(),
         appBar: appBar(context, title: 'إضـافة فـاتورة'),
-    
         body: const InvoiceBodyView(),
       ),
     );

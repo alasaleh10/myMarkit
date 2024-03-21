@@ -50,26 +50,20 @@ class SearchProductRepoIm implements SearchProductRepo {
       return left(Failure(e.toString()));
     }
   }
-  
+
   @override
-  Future<Either<Failure, dynamic>> deleteProduct({required int id}) async{
-
+  Future<Either<Failure, dynamic>> deleteProduct({required int id}) async {
     try {
-      var response=await SqlHeper.deletdata('delete from products where product_id=$id');
+      var response =
+          await SqlHeper.deletdata('delete from products where product_id=$id');
 
-    if(response>0){
-      return right(true);
-    }
-    else{
-      return left(Failure('تعذر الــحذف'));
-    }
+      if (response > 0) {
+        return right(true);
+      } else {
+        return left(Failure('تعذر الــحذف'));
+      }
     } catch (_) {
       return left(Failure('تعذر الــحذف'));
-      
     }
-
-
-   
-
   }
 }

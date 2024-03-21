@@ -8,10 +8,10 @@ class ErrorText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-                child: Text(
-                 errorMessage,
-                  style: AppStyle.style20Bold(context),
-                ),
-              );
+      child: Text(
+        errorMessage,
+        style: AppStyle.style20Bold(context),
+      ),
+    );
   }
 }
