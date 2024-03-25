@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:my_markit/core/routers/app_routers.dart';
-
 import 'package:my_markit/core/utils/markting_app_bar.dart';
 import 'package:my_markit/core/widgets/custom_float_action_button.dart';
 
@@ -23,9 +22,10 @@ class DebtsView extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             floatingActionButton: CustomFloatActionButton(
-              onPressed: () {
+              onPressed: () async {
+               
                 GoRouter.of(context)
-                    .pushNamed(AppRouters.addClintView, extra: context);
+                .pushNamed(AppRouters.addClintView, extra: context);
               },
             ),
             appBar: appBar(context, title: 'الــديون'),

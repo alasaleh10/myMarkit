@@ -8,6 +8,7 @@ class CustomTextFormFiald extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final bool? enable;
+  final int? maxLines;
   final bool? isValidator;
   final String? Function(String?)? validator;
   final void Function(String?)? onChanged;
@@ -22,13 +23,14 @@ class CustomTextFormFiald extends StatelessWidget {
       this.onChanged,
       this.isValidator = false,
       this.validator,
-      this.enable});
+      this.enable, this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
+        maxLines: maxLines,
         style: AppStyle.style20Bold(context),
         enabled: enable,
         onChanged: onChanged,

@@ -16,7 +16,7 @@ SELECT * FROM 'debts' WHERE id_clint=$id
 
 
 ''');
-    
+
       List<DebetsModel> debets = [];
       for (var item in response) {
         debets.add(DebetsModel.fromJson(item));
@@ -52,6 +52,52 @@ SELECT * FROM 'debts' WHERE id_clint=$id
       }
     } catch (_) {
       return left(Failure('فـشلة الإضـافة'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> updateDebet(
+      {required int debtId,
+      required String discription,
+      required int price}) async {
+    Map<String, dynamic> data = {'continet': discription, 'price': price};
+
+    try {
+      var response = await SqlHeper.updateData(
+          table: 'debts', data: data, where: 'debts_id=$debtId');
+      if (response > 0) {
+        return right(true);
+      } else {
+        return left(Failure('فشلة العملية'));
+      }
+    } catch (e) {
+      return left(Failure('فشلة العملية'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> deleteDebet({required int id}) async {
+    try {
+      var response =
+          await SqlHeper.deleteData(table: 'debts', where: 'debts_id=$id');
+      if (response > 0) {
+        return right(true);
+      } else {
+        return left(Failure('فشلة العملية'));
+      }
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> clearClintAccount({required int id}) async {
+    var response =
+        await SqlHeper.deleteData(table: 'debts', where: 'id_clint=$id');
+    if (response > 0) {
+      return right(true);
+    } else {
+      return left(Failure('فشلة العملية'));
     }
   }
 }

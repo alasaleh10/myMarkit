@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:my_markit/featuers/add_product/data/product_model.dart';
 import 'package:my_markit/featuers/invoice/data/invoice_model.dart';
 import 'package:my_markit/featuers/invoice/data/invoice_repo.dart';
-
 part 'invoice_state.dart';
 
 class InvoiceCubit extends Cubit<InvoiceState> {
@@ -55,30 +53,26 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   }
 
   void confirmInvoice() async {
-    try {
-      emit(InvoiceLoading2());
+    if (invoice.isEmpty) return;
+    emit(InvoiceLoading2());
 
-      for (var i = 0; i < invoice.length - 1; i++) {
-        var response = await invoiceRepo.getProduct(id: invoice[i].id);
-        response.fold((failure) {
+    for (var i = 0; i < invoiveLength(); i++) {
+      var response = await invoiceRepo.getProduct(id: invoice[i].id);
+
+      response.fold((failure) {
+        emit(InvoiceFailure2(errorMessage: failure.errorMessage));
+      }, (product) async {
+        int oldCount = int.parse(product[0].productCount!);
+        int count = invoice[i].count;
+        int newCount = oldCount - count;
+        var newReso = await invoiceRepo.confirmInvoice(
+            id: invoice[i].id, newCount: newCount.toString());
+        newReso.fold((failure) {
           emit(InvoiceFailure2(errorMessage: failure.errorMessage));
-        }, (product) async {
-          int oldCount = int.parse(product[0].productCount!);
-          int count = invoice[i].count;
-          int newCount = oldCount - count;
-          var newReso = await invoiceRepo.confirmInvoice(
-              id: invoice[i].id, newCount: newCount.toString());
-          newReso.fold((failure) {
-            emit(InvoiceFailure2(errorMessage: failure.errorMessage));
-          }, (sucsess) {
-            // invoice.removeAt(i);
-
-            emit(InvoiceSucsess2());
-          });
+        }, (sucsess) {
+          emit(InvoiceSucsess2());
         });
-      }
-    } catch (e) {
-      emit(InvoiceFailure2(errorMessage: 'فشلت الـعملية'));
+      });
     }
   }
 
@@ -106,5 +100,13 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     productCount.dispose();
     pageController.dispose();
     return super.close();
+  }
+
+  int invoiveLength() {
+    if (invoice.length == 1) {
+      return 1;
+    } else {
+      return invoice.length - 1;
+    }
   }
 }

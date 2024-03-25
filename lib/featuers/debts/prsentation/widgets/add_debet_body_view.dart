@@ -33,6 +33,7 @@ class AddDebetBodyView extends StatelessWidget {
                 hintText: 'إسـم العميل',
                 icon: FontAwesomeIcons.user),
             CustomTextFormFiald(
+                maxLines: 3,
                 isValidator: true,
                 validator: (value) {
                   return validation(value!, 'discription');

@@ -37,11 +37,13 @@ class EditeProductBodyView extends StatelessWidget {
                     controller: controller.name,
                   ),
                   CustomTextFormFiald(
+                    keyboardType: TextInputType.number,
                     hintText: 'الـسعر',
                     icon: FontAwesomeIcons.moneyCheck,
                     controller: controller.price,
                   ),
                   CustomTextFormFiald(
+                    keyboardType: TextInputType.number,
                     hintText: 'الكـمية',
                     icon: FontAwesomeIcons.hashtag,
                     controller: controller.count,

@@ -7,6 +7,7 @@ import 'package:my_markit/featuers/add_product/prsentation/views/add_product._vi
 import 'package:my_markit/featuers/debts/data/models/clint_model.dart';
 import 'package:my_markit/featuers/debts/prsentation/views/add_clint_view.dart';
 import 'package:my_markit/featuers/debts/prsentation/views/add_debet_view.dart';
+import 'package:my_markit/featuers/debts/prsentation/views/debet_detiles_view.dart';
 import 'package:my_markit/featuers/debts/prsentation/views/debts_view.dart';
 import 'package:my_markit/featuers/debts/prsentation/views/display_debts_view.dart';
 import 'package:my_markit/featuers/home/prsentation/views/home_view.dart';
@@ -100,6 +101,15 @@ abstract class Routers {
       name: AppRouters.addDebtView,
       pageBuilder: (context, state) => pageAnimation(
         page: AddDebtView(
+          data: state.extra as List,
+        ),
+      ),
+    ),
+      GoRoute(
+      path: '/${AppRouters.debetsDetilsView}',
+      name: AppRouters.debetsDetilsView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: DebetsDetilsView(
           data: state.extra as List,
         ),
       ),

@@ -9,7 +9,8 @@ class ProductActionRepIm implements ProductActionRep {
   Future<Either<Failure, dynamic>> editeProduct(
       {required Map<String, dynamic> productModel, required int id}) async {
     try {
-      var response = await SqlHeper.updateMessage(productModel, id);
+      var response = await SqlHeper.updateData(
+          table: 'products', data: productModel, where: ' product_id=$id');
       if (response > 0) {
         return right(true);
       } else {

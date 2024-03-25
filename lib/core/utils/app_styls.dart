@@ -19,4 +19,12 @@ abstract class AppStyle {
         color: AppColors.kPrimaryColor,
         fontSize: getResponsiveFontSize(context, fontSize: 20));
   }
+
+  static TextStyle style19Regular(BuildContext context) {
+    return TextStyle(
+        fontWeight: FontWeight.w400,
+        fontFamily: AppFonts.medinaFont,
+        color: AppColors.kPrimaryColor,
+        fontSize: getResponsiveFontSize(context, fontSize: 19));
+  }
 }

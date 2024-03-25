@@ -23,8 +23,10 @@ class DisplayDebtsView extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             bottomNavigationBar: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: TotalPriceDebet(
+                  clintModel: clintModel,
                     totalPriceDebet:
                         BlocProvider.of<DisplayDebetsCubit>(context)
                             .totalPrice)),
@@ -33,7 +35,9 @@ class DisplayDebtsView extends StatelessWidget {
                   extra: [clintModel, context]);
             }),
             appBar: appBar(context, title: clintModel.clintName!),
-            body: const DisplayDebetsBodyView(),
+            body: DisplayDebetsBodyView(
+                clintName: clintModel.clintName!,
+                id: clintModel.clintId!.toInt()),
           );
         },
       ),

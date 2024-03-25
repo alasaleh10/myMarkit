@@ -17,3 +17,5 @@ final class ClintsSucsess extends ClintsState {
 }
 
 final class ClintsLoading extends ClintsState {}
+final class ClintsSucsess2 extends ClintsState {}
+

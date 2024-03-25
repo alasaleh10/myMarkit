@@ -17,3 +17,5 @@ final class DisplayDebetsFailure extends DisplayDebetsState {
 }
 
 final class DisplayDebetsLoading extends DisplayDebetsState {}
+final class DisplayDebetsSucsess2 extends DisplayDebetsState {}
+

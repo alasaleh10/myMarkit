@@ -39,10 +39,11 @@ class CustomInvoiceBottomBar extends StatelessWidget {
                   style: AppStyle.style20Bold(context),
                 )),
                 Expanded(
-                    child: Text(
-                  '${decimalNumer(price: BlocProvider.of<InvoiceCubit>(context).price)}ر.ي',
-                  style: AppStyle.style20Bold(context),
-                )),
+                  child: Text(
+                    '${decimalNumer(price: BlocProvider.of<InvoiceCubit>(context).price)}ر.ي',
+                    style: AppStyle.style20Bold(context),
+                  ),
+                ),
                 Expanded(
                   child: CustomElevatedButton(
                       title: 'تــأكيد',

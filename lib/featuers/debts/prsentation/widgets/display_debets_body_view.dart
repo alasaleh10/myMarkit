@@ -7,7 +7,9 @@ import 'package:my_markit/featuers/debts/prsentation/widgets/custom_display_debe
 import 'package:my_markit/featuers/debts/prsentation/widgets/title_row.dart';
 
 class DisplayDebetsBodyView extends StatelessWidget {
-  const DisplayDebetsBodyView({super.key});
+  final int id;
+  final String clintName;
+  const DisplayDebetsBodyView({super.key, required this.clintName, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,8 @@ class DisplayDebetsBodyView extends StatelessWidget {
                     return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: CustomDisplayDebetsItem(
+                          id: id,
+                          clintName:clintName ,
                             debetsModel: state.debets[index]));
                   },
                 ),

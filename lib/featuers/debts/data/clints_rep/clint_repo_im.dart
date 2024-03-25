@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+
 import 'package:my_markit/core/failure_class.dart';
 import 'package:my_markit/core/sql_helper.dart';
 import 'package:my_markit/featuers/debts/data/clints_rep/clint_repo.dart';
@@ -75,6 +76,40 @@ class ClintRepoIm implements ClintRepo {
       }
     } catch (_) {
       return left(Failure('فشلة العميلة حاول مجددا'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> deleteClint({required int id}) async {
+    try {
+      var response =
+          await SqlHeper.deleteData(table: 'clints', where: 'clint_id=$id');
+
+      if (response > 0) {
+        return right(true);
+      } else {
+        return left(Failure('فشلة العملية'));
+      }
+    } catch (e) {
+     
+      return left(Failure('فشلة العملية'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> getClintSum({required int id}) async {
+    try {
+      var response = await SqlHeper.readdata(
+          'SELECT SUM(price) FROM debts WHERE id_clint=$id');
+
+      if (response[0]['SUM(price)'] == null) {
+        return right(true);
+      } else {
+        return left(Failure('لايمكن الحذف لانه لديه مديونات'));
+      }
+    } catch (e) {
+  
+      return left(Failure('فشلة العملية'));
     }
   }
 }

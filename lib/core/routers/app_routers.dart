@@ -10,7 +10,7 @@ abstract class AppRouters {
   static const String addClintView = 'addClintView';
   static const String displayDebtsView = 'displayDebtsView';
   static const String addDebtView = 'addDebtView';
-  // static const String splashView='/';
+  static const String debetsDetilsView='debetsDetilsView';
   // static const String splashView='/';
   // static const String splashView='/';
   // static const String splashView='/';

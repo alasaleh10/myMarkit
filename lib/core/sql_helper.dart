@@ -50,7 +50,8 @@ abstract class SqlHeper {
   "price" INTEGER NOT NULL DEFAULT 0,
   "id_clint" INTEGER NOT NULL,
   "createTime" TEXT NOT NULL,
-  FOREIGN KEY (id_clint) REFERENCES clints(clint_id)
+  FOREIGN KEY (id_clint) REFERENCES clints(clint_id) ON DELETE CASCADE
+  
 
 )
    ''');
@@ -76,6 +77,12 @@ abstract class SqlHeper {
     return response;
   }
 
+  static deleteData({required String table, required String where}) async {
+    Database? mydb = await db;
+    int response = await mydb!.delete(table, where: where);
+    return response;
+  }
+
   static uPdatedata(String sql) async {
     Database? mydb = await db;
     int response = await mydb!.rawUpdate(sql);
@@ -96,20 +103,17 @@ abstract class SqlHeper {
     return res;
   }
 
-  static updateMessage(Map<String, dynamic> productModel, int id) async {
+  static updateData(
+      {required String table,
+      required Map<String, dynamic> data,
+      required String where}) async {
     final db = _db;
-    final res =
-        await db?.update('products', productModel, where: 'product_id=$id');
+    final res = await db?.update(table, data, where: where);
 
     return res;
   }
 
-  addCategorie(dynamic categorie) async {
-    final db = _db;
-    final res = await db?.insert('categoris', categorie);
-
-    return res;
-  }
+ 
 
   static mydeletedatabase() async {
     String databasepath = await getDatabasesPath();
