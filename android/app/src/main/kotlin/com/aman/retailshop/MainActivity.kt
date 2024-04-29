@@ -1,4 +1,4 @@
-package com.example.my_markit
+package com.aman.retailshop
 
 import io.flutter.embedding.android.FlutterActivity
 
