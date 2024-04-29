@@ -23,9 +23,8 @@ class DebtsView extends StatelessWidget {
           return Scaffold(
             floatingActionButton: CustomFloatActionButton(
               onPressed: () async {
-               
                 GoRouter.of(context)
-                .pushNamed(AppRouters.addClintView, extra: context);
+                    .pushNamed(AppRouters.addClintView, extra: context);
               },
             ),
             appBar: appBar(context, title: 'الــديون'),

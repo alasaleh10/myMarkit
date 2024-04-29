@@ -39,7 +39,8 @@ class ClearClintAccount extends StatelessWidget {
                       title: 'تــأكيد',
                       onPressed: () {
                         BlocProvider.of<DisplayDebetsCubit>(context2)
-                            .clearClintAccount(context,id: clintModel.clintId!.toInt());
+                            .clearClintAccount(context,
+                                id: clintModel.clintId!.toInt());
                       }))
             ],
           )

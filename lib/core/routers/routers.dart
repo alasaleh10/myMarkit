@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_markit/core/routers/app_routers.dart';
@@ -10,8 +12,12 @@ import 'package:my_markit/featuers/debts/prsentation/views/add_debet_view.dart';
 import 'package:my_markit/featuers/debts/prsentation/views/debet_detiles_view.dart';
 import 'package:my_markit/featuers/debts/prsentation/views/debts_view.dart';
 import 'package:my_markit/featuers/debts/prsentation/views/display_debts_view.dart';
+import 'package:my_markit/featuers/display_invoices/views/display_invoice_view.dart';
+import 'package:my_markit/featuers/display_invoices/views/invoicess_view.dart';
 import 'package:my_markit/featuers/home/prsentation/views/home_view.dart';
+import 'package:my_markit/featuers/invoice/prsentation/views/display_invoice_view.dart';
 import 'package:my_markit/featuers/invoice/prsentation/views/invoice_view.dart';
+import 'package:my_markit/featuers/preview_pdf/views/preview_pdf_view.dart';
 import 'package:my_markit/featuers/spalsh_screen/splash_view.dart';
 import 'package:my_markit/featuers/srach_product/prsentation/views/edite_product_view.dart';
 import 'package:my_markit/featuers/srach_product/prsentation/views/search_product_view.dart';
@@ -105,12 +111,44 @@ abstract class Routers {
         ),
       ),
     ),
-      GoRoute(
+    GoRoute(
       path: '/${AppRouters.debetsDetilsView}',
       name: AppRouters.debetsDetilsView,
       pageBuilder: (context, state) => pageAnimation(
         page: DebetsDetilsView(
           data: state.extra as List,
+        ),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRouters.previewPdView}',
+      name: AppRouters.previewPdView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: PreviewPdfView(
+          file: state.extra as File,
+        ),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRouters.displayInvoiceView}',
+      name: AppRouters.displayInvoiceView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: const DisplayInvoiceView(),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRouters.invoicessView}',
+      name: AppRouters.invoicessView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: const InvoicessView(),
+      ),
+    ),
+    GoRoute(
+      path: '/${AppRouters.displayInvoicessView}',
+      name: AppRouters.displayInvoicessView,
+      pageBuilder: (context, state) => pageAnimation(
+        page: DisplayInvoicessView(
+          invoiceNumbder: state.extra as int,
         ),
       ),
     ),

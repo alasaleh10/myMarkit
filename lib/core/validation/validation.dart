@@ -3,8 +3,8 @@ import 'package:my_markit/core/validation/reqular_exc.dart';
 validation(String value, String type, {String? password}) {
   switch (type) {
     case 'caintName':
-      if (value.isEmpty) {
-        return "لايمكن ترك الاسم فارغا";
+      if (!RegExp(arabicName).hasMatch(value)) {
+        return " الاسم عربي ولايمكن تركه فارغا";
       } else if (value.length <= 3) {
         return 'الإسم يجب ان يكون اكبر من 3';
       }

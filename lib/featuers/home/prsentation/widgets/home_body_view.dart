@@ -21,7 +21,7 @@ class HomeBodyView extends StatelessWidget {
             ImageColumn(
                 title: 'إضافة منتج',
                 image: Assets.imagesAdd,
-                onTap: () {
+                onTap: () async {
                   GoRouter.of(context).pushNamed(AppRouters.addProductView);
                 }),
             ImageColumn(
@@ -47,8 +47,16 @@ class HomeBodyView extends StatelessWidget {
                 image: Assets.imagesDebts,
                 onTap: () {
                   GoRouter.of(context).pushNamed(AppRouters.debtsView);
-                })
+                }),
           ],
+        ),
+        const SizedBox(height: 20),
+        ImageColumn(
+          title: 'عــرض الفواتــير',
+          image: Assets.imagesDisplayInvoicess,
+          onTap: () {
+            GoRouter.of(context).pushNamed(AppRouters.invoicessView);
+          },
         )
       ],
     );

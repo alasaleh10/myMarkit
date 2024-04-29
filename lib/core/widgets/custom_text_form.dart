@@ -23,7 +23,8 @@ class CustomTextFormFiald extends StatelessWidget {
       this.onChanged,
       this.isValidator = false,
       this.validator,
-      this.enable, this.maxLines});
+      this.enable,
+      this.maxLines});
 
   @override
   Widget build(BuildContext context) {

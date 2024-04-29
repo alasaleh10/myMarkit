@@ -10,6 +10,5 @@ abstract class ClintRepo {
   Future<Either<Failure, List<ClintModel>>> getCustomClint(
       {required String name});
   Future<Either<Failure, dynamic>> deleteClint({required int id});
-  Future<Either<Failure,dynamic>>getClintSum({required int id});
-
+  Future<Either<Failure, dynamic>> getClintSum({required int id});
 }

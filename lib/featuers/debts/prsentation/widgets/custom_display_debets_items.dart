@@ -11,17 +11,18 @@ class CustomDisplayDebetsItem extends StatelessWidget {
   final int id;
   final String clintName;
   final DebetsModel debetsModel;
-  const CustomDisplayDebetsItem({super.key, required this.debetsModel, required this.clintName, required this.id});
+  const CustomDisplayDebetsItem(
+      {super.key,
+      required this.debetsModel,
+      required this.clintName,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-
       onTap: () {
-        GoRouter.of(context).pushNamed(AppRouters.debetsDetilsView,extra: [
-          context,debetsModel,clintName,id
-        ]
-        );
+        GoRouter.of(context).pushNamed(AppRouters.debetsDetilsView,
+            extra: [context, debetsModel, clintName, id]);
       },
       child: Column(
         children: [

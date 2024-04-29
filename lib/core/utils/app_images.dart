@@ -17,6 +17,11 @@ class Assets {
   /// assets/images/debts.svg
   static const String imagesDebts = "assets/images/debts.svg";
 
+  /// Assets for imagesDisplayInvoicess
+  /// assets/images/display_invoicess.svg
+  static const String imagesDisplayInvoicess =
+      "assets/images/display_invoicess.svg";
+
   /// Assets for imagesInvoice
   /// assets/images/invoice.svg
   static const String imagesInvoice = "assets/images/invoice.svg";

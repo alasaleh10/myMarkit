@@ -27,6 +27,4 @@ class ClintsCubit extends Cubit<ClintsState> {
       emit(ClintsSucsess(clints: clints));
     });
   }
-
-  
 }

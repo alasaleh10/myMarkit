@@ -12,7 +12,7 @@ class InvoiceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => InvoiceCubit(InvoiceRepoIm()),
+      create: (context) => InvoiceCubit(InvoiceRepoIm(), context),
       child: Scaffold(
         bottomNavigationBar: const CustomInvoiceBottomBar(),
         appBar: appBar(context, title: 'إضـافة فـاتورة'),

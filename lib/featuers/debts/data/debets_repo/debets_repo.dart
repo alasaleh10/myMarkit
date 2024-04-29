@@ -11,6 +11,6 @@ abstract class DebetsRepo {
   });
   Future<Either<Failure, dynamic>> updateDebet(
       {required int debtId, required String discription, required int price});
-      Future<Either<Failure,dynamic>> deleteDebet({required int id});
-            Future<Either<Failure,dynamic>> clearClintAccount({required int id});
+  Future<Either<Failure, dynamic>> deleteDebet({required int id});
+  Future<Either<Failure, dynamic>> clearClintAccount({required int id});
 }

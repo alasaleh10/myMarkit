@@ -6,6 +6,7 @@ import 'package:my_markit/core/utils/app_colors.dart';
 import 'package:my_markit/core/utils/app_styls.dart';
 import 'package:my_markit/core/widgets/custom_elevated_button.dart';
 import 'package:my_markit/featuers/invoice/prsentation/manger/invoice_cubit/invoice_cubit.dart';
+import 'package:my_markit/featuers/invoice/prsentation/widgets/create_invoice_alert.dart';
 
 class CustomInvoiceBottomBar extends StatelessWidget {
   const CustomInvoiceBottomBar({super.key});
@@ -22,7 +23,12 @@ class CustomInvoiceBottomBar extends StatelessWidget {
           } else if (state is InvoiceSucsess2) {
             ScaffoldMessenger.of(context).showSnackBar(
                 customSnackBar(context, title: 'تمت العميلة بنجاح'));
-            BlocProvider.of<InvoiceCubit>(context).clearData();
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (_) => CreateInvoiceAlert(
+                      context2: context,
+                    ));
           }
         },
         builder: (context, state) {
@@ -47,7 +53,7 @@ class CustomInvoiceBottomBar extends StatelessWidget {
                 Expanded(
                   child: CustomElevatedButton(
                       title: 'تــأكيد',
-                      onPressed: () {
+                      onPressed: () async {
                         BlocProvider.of<InvoiceCubit>(context).confirmInvoice();
                       }),
                 )

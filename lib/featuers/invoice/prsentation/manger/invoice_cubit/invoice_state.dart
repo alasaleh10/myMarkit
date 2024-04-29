@@ -16,6 +16,8 @@ final class InvoiceLoading2 extends InvoiceState {}
 
 final class InvoiceSucsess2 extends InvoiceState {}
 
+final class InvoiceSucsess3 extends InvoiceState {}
+
 final class InvoiceFailure extends InvoiceState {
   final String errorMessage;
 

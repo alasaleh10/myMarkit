@@ -11,4 +11,14 @@ abstract class InvoiceRepo {
   Future<Either<Failure, dynamic>> confirmInvoice(
       {required int id, required String newCount});
   Future<Either<Failure, List<ProductModel>>> getProduct({required int id});
+  Future<Either<Failure, dynamic>> addInvoice({
+    required String clintName,
+    required int invoiceType,
+    required int invoicePrice,
+  });
+  Future<Either<Failure, int>> addItemsToInvoice({
+    required String productName,
+    required int ontPrice,
+    required int count,
+  });
 }

@@ -18,7 +18,7 @@ class DebetsDetilsView extends StatelessWidget {
           DebtsDetilsCubit(DebetsRepoIm())..onInit(debetsModel: data[1]),
       child: Scaffold(
         appBar: appBar(context, title: data[2]),
-        body:  DebetsDetilsBodyView(
+        body: DebetsDetilsBodyView(
           id: data[3],
           context2: data[0],
         ),

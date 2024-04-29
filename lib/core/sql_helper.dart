@@ -51,8 +51,31 @@ abstract class SqlHeper {
   "id_clint" INTEGER NOT NULL,
   "createTime" TEXT NOT NULL,
   FOREIGN KEY (id_clint) REFERENCES clints(clint_id) ON DELETE CASCADE
-  
+)
+   ''');
+    //  0اجل
+    // 1 نقدا
+    await db.execute('''
+   CREATE TABLE "invoics" (
+  "invoice_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "clint_name" TEXT NOT NULL,
+  "invoice_number" INTEGER NOT NULL,
+  "invoice_type" INTEGER NOT NULL,
+  "invoice_price" INTEGER NOT NULL,
+  "createTime" TEXT NOT NULL
 
+)
+   ''');
+
+    await db.execute('''
+   CREATE TABLE "invoice_items" (
+  "invoice_items_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "product_name" TEXT NOT NULL,
+  "ont_price" INTEGER NOT NULL,
+  "count" INTEGER NOT NULL,
+  "number_invoice" INTEGER NOT NULL,
+
+  FOREIGN KEY (number_invoice) REFERENCES invoics(invoice_number) ON DELETE CASCADE
 )
    ''');
 
@@ -112,8 +135,6 @@ abstract class SqlHeper {
 
     return res;
   }
-
- 
 
   static mydeletedatabase() async {
     String databasepath = await getDatabasesPath();

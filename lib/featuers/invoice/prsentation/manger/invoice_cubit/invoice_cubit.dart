@@ -1,17 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:my_markit/core/routers/app_routers.dart';
+
 import 'package:my_markit/featuers/add_product/data/product_model.dart';
 import 'package:my_markit/featuers/invoice/data/invoice_model.dart';
 import 'package:my_markit/featuers/invoice/data/invoice_repo.dart';
+import 'package:my_markit/featuers/pdf/ceate_pdf.dart';
 part 'invoice_state.dart';
 
 class InvoiceCubit extends Cubit<InvoiceState> {
   final InvoiceRepo invoiceRepo;
-  InvoiceCubit(this.invoiceRepo) : super(InvoiceInitial());
+  final BuildContext context;
+  InvoiceCubit(this.invoiceRepo, this.context) : super(InvoiceInitial());
   List<InvoiceModel> invoice = [];
+  final key = GlobalKey<FormState>();
   int price = 0;
+  int? invoiceNumber;
   var productCount = TextEditingController(text: 1.toString());
-
+  var clintName = TextEditingController();
+  int? invoiceType;
   PageController pageController = PageController();
 
   int index = 0;
@@ -56,24 +66,28 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     if (invoice.isEmpty) return;
     emit(InvoiceLoading2());
 
-    for (var i = 0; i < invoiveLength(); i++) {
-      var response = await invoiceRepo.getProduct(id: invoice[i].id);
+    try {
+      for (var i = 0; i < invoiveLength(); i++) {
+        var response = await invoiceRepo.getProduct(id: invoice[i].id);
 
-      response.fold((failure) {
-        emit(InvoiceFailure2(errorMessage: failure.errorMessage));
-      }, (product) async {
-        int oldCount = int.parse(product[0].productCount!);
-        int count = invoice[i].count;
-        int newCount = oldCount - count;
-        var newReso = await invoiceRepo.confirmInvoice(
-            id: invoice[i].id, newCount: newCount.toString());
-        newReso.fold((failure) {
+        response.fold((failure) {
           emit(InvoiceFailure2(errorMessage: failure.errorMessage));
-        }, (sucsess) {
-          emit(InvoiceSucsess2());
+        }, (product) async {
+          int oldCount = int.parse(product[0].productCount!);
+          int count = invoice[i].count;
+          int newCount = oldCount - count;
+          var newReso = await invoiceRepo.confirmInvoice(
+              id: invoice[i].id, newCount: newCount.toString());
+          newReso.fold((failure) {
+            emit(InvoiceFailure2(errorMessage: failure.errorMessage));
+          }, (sucsess) async {
+            // await addInvoice(context);
+
+            emit(InvoiceSucsess2());
+          });
         });
-      });
-    }
+      }
+    } catch (_) {}
   }
 
   void deleteItem({required int index, required int productPrice}) {
@@ -85,6 +99,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   void clearData() {
     price = 0;
     invoice.clear();
+
     emit(InvoiceInitial());
   }
 
@@ -108,5 +123,62 @@ class InvoiceCubit extends Cubit<InvoiceState> {
     } else {
       return invoice.length - 1;
     }
+  }
+
+  void addInvoiceToData() async {
+    var response = await invoiceRepo.addInvoice(
+      clintName: clintName.text,
+      invoiceType: invoiceType!,
+      invoicePrice: price,
+    );
+    response.fold((failure) {}, (sucsess) async {
+      for (var item in invoice) {
+        var res = await invoiceRepo.addItemsToInvoice(
+            productName: item.productName,
+            ontPrice: item.onePrice,
+            count: item.count);
+        res.fold((failue) {
+          debugPrint(failue.errorMessage);
+          return;
+        }, (invoiceNumber1) async {
+          invoiceNumber = invoiceNumber1;
+          await addInvoice(context);
+          emit(InvoiceSucsess3());
+
+          return;
+        });
+      }
+    });
+
+    // invoice.clear();
+    // addInvoice(context);
+  }
+
+  File? file;
+  Future<void> addInvoice(BuildContext context) async {
+    if (key.currentState!.validate()) {
+      file = await createPdf(context,
+          clintName: clintName.text,
+          invoicetype: invoiceType!,
+          invoice: invoice,
+          invoiceNumber: invoiceNumber!);
+
+      invoice.clear();
+      price = 0;
+      clintName.clear();
+
+      // ignore: use_build_context_synchronously
+      GoRouter.of(context).pop();
+
+      // ignore: use_build_context_synchronously
+      GoRouter.of(context).pushNamed(AppRouters.previewPdView, extra: file);
+    }
+    emit(InvoiceInitial());
+  }
+
+  void setInvoiceType({required int invoiceType}) {
+    this.invoiceType = invoiceType;
+
+    emit(InvoiceSucsess3());
   }
 }

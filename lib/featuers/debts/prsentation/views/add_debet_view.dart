@@ -19,8 +19,7 @@ class AddDebtView extends StatelessWidget {
       create: (context) => AddDebetCubit(DebetsRepoIm()),
       child: Scaffold(
         appBar: appBar(context, title: 'إضـافة ديـن'),
-        body: AddDebetBodyView(clintModel: data[0],
-        context2: data[1]),
+        body: AddDebetBodyView(clintModel: data[0], context2: data[1]),
       ),
     );
   }

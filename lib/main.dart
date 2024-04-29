@@ -21,7 +21,7 @@ class MyMarket extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      locale: const Locale('ar'),
+      locale: const Locale('ar', 'SA'),
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

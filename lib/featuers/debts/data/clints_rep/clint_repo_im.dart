@@ -91,7 +91,6 @@ class ClintRepoIm implements ClintRepo {
         return left(Failure('فشلة العملية'));
       }
     } catch (e) {
-     
       return left(Failure('فشلة العملية'));
     }
   }
@@ -108,7 +107,6 @@ class ClintRepoIm implements ClintRepo {
         return left(Failure('لايمكن الحذف لانه لديه مديونات'));
       }
     } catch (e) {
-  
       return left(Failure('فشلة العملية'));
     }
   }

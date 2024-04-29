@@ -12,3 +12,4 @@ const String usernamelength = '^.{7,10}';
 const String userNameReg = '^[a-zA-Z0-9]';
 
 const String phoneNumber = '^[0-9]';
+const String arabicName = '^[أ-ي]';

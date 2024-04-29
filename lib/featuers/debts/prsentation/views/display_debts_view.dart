@@ -26,7 +26,7 @@ class DisplayDebtsView extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: TotalPriceDebet(
-                  clintModel: clintModel,
+                    clintModel: clintModel,
                     totalPriceDebet:
                         BlocProvider.of<DisplayDebetsCubit>(context)
                             .totalPrice)),

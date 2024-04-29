@@ -10,9 +10,4 @@ final class DeleteClintFailure extends DeleteClintState {
   DeleteClintFailure({required this.errorMessage});
 }
 
-final class DeleteClintSucsess extends DeleteClintState {
-
-
-
-
-}
+final class DeleteClintSucsess extends DeleteClintState {}
